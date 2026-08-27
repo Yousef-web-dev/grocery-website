@@ -11,18 +11,23 @@ import AllProducts from "./components/allproducts/AllProducts";
 import CartPage from "./pages/CartPage";
 import WishlistPage from "./pages/WishlistPage";
 
-const router = createBrowserRouter([
+const router = createBrowserRouter(
+  [
+    {
+      path: "/",
+      element: <Layout />,
+      children: [
+        { index: true, element: <Home /> },
+        { path: "allproducts", element: <AllProducts /> },
+        { path: "cart", element: <CartPage /> },
+        { path: "wishlist", element: <WishlistPage /> },
+      ],
+    },
+  ],
   {
-    path: "/",
-    element: <Layout />,
-    children: [
-      { index: true, element: <Home /> },
-      { path: "allproducts", element: <AllProducts /> },
-      { path: "cart", element: <CartPage /> },
-      { path: "wishlist", element: <WishlistPage /> },
-    ],
-  },
-]);
+    basename: "/grocery-website",
+  }
+);
 
 const App = () => {
   useEffect(() => {
