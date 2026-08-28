@@ -4,7 +4,7 @@ import { products } from "../products/productsList";
 import { motion } from "framer-motion";
 
 const CategoryPage = ({ title, bgImage, category = "All" }) => {
-  // الفلترة الصحيحة: لو "All" بيعرض الكل، غير كده بيفلتر حسب الـ category الخاص بالمنتج
+
   const filteredItems = category === "All"
     ? products
     : products.filter((item) => item.category?.toLowerCase() === category.toLowerCase());
@@ -38,7 +38,6 @@ const CategoryPage = ({ title, bgImage, category = "All" }) => {
             {renderProducts}
           </motion.div>
         ) : (
-          /* رسالة تنبيه لو مفيش منتجات في القسم ده */
           <div className="text-center py-20 text-zinc-500 text-xl font-medium">
             No products found in this category.
           </div>

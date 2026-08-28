@@ -32,7 +32,7 @@ const Values = () => {
     },
   ];
 
-  // اليسار: يدخل من الشمال مع غباشة خفيفة وحركة Hover للأيقونة
+
   const leftValues = value.slice(0, 2).map((item, index) => (
     <motion.div
       key={item.id}
@@ -62,7 +62,7 @@ const Values = () => {
     </motion.div>
   ));
 
-  // اليمين: يدخل من اليمين مع غباشة خفيفة وحركة Hover للأيقونة
+
   const rightValues = value.slice(2).map((item, index) => (
     <motion.div
       key={item.id}

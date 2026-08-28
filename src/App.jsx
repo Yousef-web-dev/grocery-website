@@ -8,8 +8,11 @@ import { CartProvider } from "./components/cartcontext/CartContext";
 import Layout from "./components/layout/Layout";
 import Home from "./components/home/Home";
 import AllProducts from "./components/allproducts/AllProducts";
-import CartPage from "./pages/CartPage";
-import WishlistPage from "./pages/WishlistPage";
+import CartPage from "./pages/cart/CartPage";
+import WishlistPage from "./pages/heart/WishlistPage";
+import Fruits from "./components/fruits/Fruits";
+import Dairy from "./components/dairy/Dairy";
+import SeaFood from "./components/seafood/SeaFood";
 
 const router = createBrowserRouter(
   [
@@ -21,12 +24,16 @@ const router = createBrowserRouter(
         { path: "allproducts", element: <AllProducts /> },
         { path: "cart", element: <CartPage /> },
         { path: "wishlist", element: <WishlistPage /> },
+
+        { path: "fruits", element: <Fruits /> },
+        { path: "dairy", element: <Dairy /> },
+        { path: "seafood", element: <SeaFood /> },
       ],
     },
   ],
   {
     basename: "/grocery-website",
-  }
+  },
 );
 
 const App = () => {

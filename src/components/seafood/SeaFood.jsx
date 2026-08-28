@@ -1,5 +1,5 @@
 import CategoryPage from "../categorypage/CategoryPage";
-import BgSeaFood from "../../assets/seafood-banner.webp"; // تأكد من اسم ومسار الصورة
+import BgSeaFood from "../../assets/seafood-banner.webp"; 
 
 const SeaFood = () => {
   return (

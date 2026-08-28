@@ -1,5 +1,5 @@
 import CategoryPage from "../categorypage/CategoryPage";
-import BgFruits from "../../assets/Fruits-banner.webp"; // تأكد من اسم ومسار الصورة
+import BgFruits from "../../assets/Fruits-banner.webp"; 
 
 const Fruits = () => {
   return (

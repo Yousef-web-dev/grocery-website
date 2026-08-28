@@ -12,13 +12,15 @@ const Home = () => {
       <section id="home">
         <Hero />
       </section>
-      <Category />
-      <section id="about" className="scroll-mt-24">
-        <Values />
+      <section id="shop">
+        <Category />
       </section>
-      <Products />
+      <Values />
+      <section id="product">
+        <Products />
+      </section>
       <Discount />
-      <section id="process" className="scroll-mt-24">
+      <section id="process">
         <Process />
       </section>
       <Testimonials />

@@ -1,5 +1,5 @@
 import CategoryPage from "../categorypage/CategoryPage";
-import BgDairy from "../../assets/dairy-banner.webp"; // تأكد من اسم ومسار الصورة
+import BgDairy from "../../assets/dairy-banner.webp"; 
 
 const Dairy = () => {
   return (

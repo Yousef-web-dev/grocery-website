@@ -1,16 +1,27 @@
-import React, { useRef } from "react";
+import React, { useRef, useEffect } from "react";
 import Heading from "../heading/Heading";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { FaStar } from "react-icons/fa";
 import { motion } from "framer-motion";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
+import AOS from "aos";
 
-// استيراد ستايلات Swiper الأساسية
 import "swiper/css";
+import "aos/dist/aos.css";
 
 const Testimonials = () => {
   const swiperRef = useRef(null);
+
+  useEffect(() => {
+    AOS.init({
+      duration: 1000,
+      once: false,
+      mirror: true,
+      easing: "ease-out-cubic",
+    });
+    AOS.refresh();
+  }, []);
 
   const testimonials = [
     {
@@ -47,31 +58,22 @@ const Testimonials = () => {
     },
   ];
 
-  // Variants لأنيميشن ظهور السكشن
-  const containerVariants = {
-    hidden: { opacity: 0, y: 40 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.6, ease: "easeOut" },
-    },
-  };
-
   return (
     <section className="overflow-hidden bg-white py-16 sm:py-24">
-      <motion.div
-        variants={containerVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
-        className="max-w-[1400px] mx-auto px-5 sm:px-10"
-      >
-        {/* الهيدر مع أزرار التنقل */}
+      <div className="max-w-[1400px] mx-auto px-5 sm:px-10">
+        
+        {/* Header Section */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-          <Heading highlight="Customers" heading="Saying" />
+          <div data-aos="fade-right" data-aos-duration="800">
+            <Heading highlight="Customers" heading="Saying" />
+          </div>
 
-          {/* أزرار السلايدر */}
-          <div className="flex gap-x-3 self-end sm:self-auto">
+          {/* Swiper Navigation Buttons */}
+          <div 
+            data-aos="fade-left" 
+            data-aos-duration="800"
+            className="flex gap-x-3 self-end sm:self-auto"
+          >
             <button
               onClick={() => swiperRef.current?.slidePrev()}
               aria-label="Previous Slide"
@@ -89,8 +91,8 @@ const Testimonials = () => {
           </div>
         </div>
 
-        {/* الـ Swiper الكروت */}
-        <div className="mt-10 sm:mt-14">
+        {/* Swiper Cards */}
+        <div data-aos="fade-up" data-aos-delay="200" className="mt-10 sm:mt-14">
           <Swiper
             modules={[Autoplay]}
             autoplay={{ delay: 4000, disableOnInteraction: false }}
@@ -107,17 +109,15 @@ const Testimonials = () => {
             className="!pb-6 !pt-2"
           >
             {testimonials.map((item) => (
-              <SwiperSlide key={item.id}>
-                {/* كارت العميل مع أنيميشن الهوفر */}
+              <SwiperSlide key={item.id} className="h-auto">
                 <motion.div
                   whileHover={{ y: -8, scale: 1.01 }}
                   transition={{ type: "spring", stiffness: 260, damping: 20 }}
                   className="bg-zinc-100/80 hover:bg-white p-7 rounded-2xl border border-transparent hover:border-zinc-200 transition-all duration-300 hover:shadow-xl flex flex-col justify-between h-full group cursor-grab active:cursor-grabbing"
                 >
                   <div>
-                    {/* معلومات العميل */}
+                    {/* Customer Info */}
                     <div className="flex items-center gap-4">
-                      {/* إطار الصورة اللطيف */}
                       <div className="relative shrink-0">
                         <img
                           src={item.image}
@@ -134,7 +134,7 @@ const Testimonials = () => {
                           {item.profession}
                         </p>
 
-                        {/* النجوم */}
+                        {/* Stars */}
                         <div className="flex gap-1 text-amber-400 mt-1.5 text-sm">
                           {Array.from({ length: item.rating }, (_, index) => (
                             <FaStar key={index} />
@@ -143,7 +143,7 @@ const Testimonials = () => {
                       </div>
                     </div>
 
-                    {/* نص التقييم */}
+                    {/* Review Text */}
                     <p className="text-zinc-600 text-sm sm:text-base mt-6 leading-relaxed group-hover:text-zinc-700 transition-colors">
                       "{item.para}"
                     </p>
@@ -153,7 +153,8 @@ const Testimonials = () => {
             ))}
           </Swiper>
         </div>
-      </motion.div>
+
+      </div>
     </section>
   );
 };
