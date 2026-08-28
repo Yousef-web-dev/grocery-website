@@ -1,10 +1,22 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { motion } from "framer-motion";
 import Heading from "../heading/Heading";
 import { FaHeart, FaLeaf, FaSeedling, FaShieldAlt } from "react-icons/fa";
 import Basket from "../../assets/basket-full-vegetables.webp";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const Values = () => {
+  useEffect(() => {
+    AOS.init({
+      duration: 1000,
+      once: false,
+      mirror: true,
+      easing: "ease-out-cubic",
+    });
+    AOS.refresh();
+  }, []);
+
   const value = [
     {
       id: 1,
@@ -32,70 +44,74 @@ const Values = () => {
     },
   ];
 
-
   const leftValues = value.slice(0, 2).map((item, index) => (
-    <motion.div
+    <div
       key={item.id}
-      initial={{ opacity: 0, x: -60, filter: "blur(6px)" }}
-      whileInView={{ opacity: 1, x: 0, filter: "blur(0px)" }}
-      transition={{ duration: 0.7, delay: index * 0.2, ease: "easeOut" }}
-      viewport={{ once: true, amount: 0.3 }}
-      whileHover={{ x: -6 }}
-      className="flex md:flex-row-reverse items-center gap-7 group cursor-pointer"
+      data-aos="fade-right"
+      data-aos-delay={index * 200}
+      data-aos-duration="900"
     >
-      <div>
-        <motion.span
-          whileHover={{ scale: 1.15, rotate: 10 }}
-          transition={{ type: "spring", stiffness: 400 }}
-          className="flex w-15 h-15 rounded-full justify-center items-center text-3xl text-white bg-gradient-to-b from-orange-400 to-orange-500 shadow-md group-hover:shadow-orange-400/50 transition-shadow"
-        >
-          {item.icon}
-        </motion.span>
-      </div>
+      <motion.div
+        whileHover={{ x: -6 }}
+        className="flex md:flex-row-reverse items-center gap-7 group cursor-pointer"
+      >
+        <div>
+          <motion.span
+            whileHover={{ scale: 1.15, rotate: 10 }}
+            transition={{ type: "spring", stiffness: 400 }}
+            className="flex w-15 h-15 rounded-full justify-center items-center text-3xl text-white bg-gradient-to-b from-orange-400 to-orange-500 shadow-md group-hover:shadow-orange-400/50 transition-shadow"
+          >
+            {item.icon}
+          </motion.span>
+        </div>
 
-      <div className="md:text-right">
-        <h3 className="text-zinc-800 text-3xl font-bold group-hover:text-orange-500 transition-colors">
-          {item.title}
-        </h3>
-        <p className="text-zinc-600 mt-2">{item.para}</p>
-      </div>
-    </motion.div>
+        <div className="md:text-right">
+          <h3 className="text-zinc-800 text-3xl font-bold group-hover:text-orange-500 transition-colors">
+            {item.title}
+          </h3>
+          <p className="text-zinc-600 mt-2">{item.para}</p>
+        </div>
+      </motion.div>
+    </div>
   ));
 
-
   const rightValues = value.slice(2).map((item, index) => (
-    <motion.div
+    <div
       key={item.id}
-      initial={{ opacity: 0, x: 60, filter: "blur(6px)" }}
-      whileInView={{ opacity: 1, x: 0, filter: "blur(0px)" }}
-      transition={{ duration: 0.7, delay: index * 0.2, ease: "easeOut" }}
-      viewport={{ once: true, amount: 0.3 }}
-      whileHover={{ x: 6 }}
-      className="flex items-center gap-7 group cursor-pointer"
+      data-aos="fade-left"
+      data-aos-delay={index * 200}
+      data-aos-duration="900"
     >
-      <div>
-        <motion.span
-          whileHover={{ scale: 1.15, rotate: -10 }}
-          transition={{ type: "spring", stiffness: 400 }}
-          className="flex w-15 h-15 rounded-full justify-center items-center text-3xl text-white bg-gradient-to-b from-orange-400 to-orange-500 shadow-md group-hover:shadow-orange-400/50 transition-shadow"
-        >
-          {item.icon}
-        </motion.span>
-      </div>
+      <motion.div
+        whileHover={{ x: 6 }}
+        className="flex items-center gap-7 group cursor-pointer"
+      >
+        <div>
+          <motion.span
+            whileHover={{ scale: 1.15, rotate: -10 }}
+            transition={{ type: "spring", stiffness: 400 }}
+            className="flex w-15 h-15 rounded-full justify-center items-center text-3xl text-white bg-gradient-to-b from-orange-400 to-orange-500 shadow-md group-hover:shadow-orange-400/50 transition-shadow"
+          >
+            {item.icon}
+          </motion.span>
+        </div>
 
-      <div>
-        <h3 className="text-zinc-800 text-3xl font-bold group-hover:text-orange-500 transition-colors">
-          {item.title}
-        </h3>
-        <p className="text-zinc-600 mt-2">{item.para}</p>
-      </div>
-    </motion.div>
+        <div>
+          <h3 className="text-zinc-800 text-3xl font-bold group-hover:text-orange-500 transition-colors">
+            {item.title}
+          </h3>
+          <p className="text-zinc-600 mt-2">{item.para}</p>
+        </div>
+      </motion.div>
+    </div>
   ));
 
   return (
     <section className="overflow-hidden">
       <div className="max-w-[1400px] mx-auto px-10 py-20">
-        <Heading highlight="Our" heading="values" />
+        <div data-aos="fade-down" data-aos-duration="800" className="w-fit">
+          <Heading highlight="Our" heading="values" />
+        </div>
 
         <div className="flex md:flex-row flex-col gap-15 md:gap-5 mt-15 items-center">
           {/* left values */}
@@ -104,11 +120,9 @@ const Values = () => {
           </div>
 
           {/* center animated image */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.7 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            viewport={{ once: true }}
+          <div
+            data-aos="zoom-in"
+            data-aos-duration="1000"
             className="w-1/2 hidden md:flex justify-center items-center relative"
           >
             {/* Glow effect behind basket */}
@@ -125,7 +139,7 @@ const Values = () => {
                 ease: "easeInOut",
               }}
             />
-          </motion.div>
+          </div>
 
           {/* right values */}
           <div className="md:min-h-100 gap-15 flex flex-col justify-between flex-1">
