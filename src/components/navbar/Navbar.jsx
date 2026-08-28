@@ -25,6 +25,15 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // دالة الصعود لأعلى الصفحة (تتوافق مع Lenis و Native Scroll)
+  const handleScrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+    setShowMenu(false);
+  };
+
   const toggleMenu = () => {
     setShowMenu(!showMenu);
   };
@@ -73,6 +82,7 @@ const Navbar = () => {
         <motion.div whileHover={{ scale: 1.05 }} transition={{ type: "spring", stiffness: 400 }}>
           <Link
             to="/"
+            onClick={handleScrollToTop}
             className="text-2xl sm:text-3xl font-bold font-heading italic"
           >
             Gr<span className="text-orange-500 uppercase">O</span>cify
@@ -93,6 +103,7 @@ const Navbar = () => {
               ) : (
                 <Link
                   to={link.path}
+                  onClick={handleScrollToTop}
                   className="font-semibold tracking-wider text-zinc-800 group-hover:text-orange-500 transition-colors"
                 >
                   {link.name}
@@ -211,7 +222,7 @@ const Navbar = () => {
                     ) : (
                       <Link
                         to={link.path}
-                        onClick={() => setShowMenu(false)}
+                        onClick={handleScrollToTop}
                         className="font-semibold tracking-wider text-zinc-800 hover:text-orange-500 text-lg transition-colors"
                       >
                         {link.name}

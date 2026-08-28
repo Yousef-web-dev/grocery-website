@@ -32,8 +32,8 @@ const router = createBrowserRouter(
     },
   ],
   {
-    basename: "/grocery-website",
-  },
+    basename: import.meta.env.DEV ? "/" : "/grocery-website",
+  }
 );
 
 const App = () => {
