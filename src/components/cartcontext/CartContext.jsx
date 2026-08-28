@@ -6,7 +6,7 @@ export const CartProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
   const [favorites, setFavorites] = useState([]);
 
-  // إضافة / حذف من المفضلة
+
   const toggleFavorite = (product) => {
     setFavorites((prev) =>
       prev.some((item) => item.id === product.id)
@@ -15,7 +15,7 @@ export const CartProvider = ({ children }) => {
     );
   };
 
-  // إضافة للسلة
+
   const addToCart = (product) => {
     setCart((prev) => {
       const existing = prev.find((item) => item.id === product.id);
@@ -28,8 +28,33 @@ export const CartProvider = ({ children }) => {
     });
   };
 
+
+  const decreaseQuantity = (id) => {
+    setCart((prev) =>
+      prev
+        .map((item) =>
+          item.id === id ? { ...item, quantity: item.quantity - 1 } : item
+        )
+        .filter((item) => item.quantity > 0) 
+    );
+  };
+
+
+  const removeFromCart = (id) => {
+    setCart((prev) => prev.filter((item) => item.id !== id));
+  };
+
   return (
-    <CartContext.Provider value={{ cart, favorites, addToCart, toggleFavorite }}>
+    <CartContext.Provider
+      value={{
+        cart,
+        favorites,
+        addToCart,
+        decreaseQuantity,
+        removeFromCart,
+        toggleFavorite,
+      }}
+    >
       {children}
     </CartContext.Provider>
   );

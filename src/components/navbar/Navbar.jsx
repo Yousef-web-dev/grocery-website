@@ -29,33 +29,32 @@ const Navbar = () => {
     setShowMenu(!showMenu);
   };
 
-const handleSearchSubmit = (e) => {
-  e.preventDefault();
-  const query = searchQuery.trim().toLowerCase();
+  const handleSearchSubmit = (e) => {
+    e.preventDefault();
+    const query = searchQuery.trim().toLowerCase();
 
-  if (!query) return;
+    if (!query) return;
 
-  if (query.includes("seafood") || query.includes("meat")) {
-    navigate("/seafood");
-  } else if (query.includes("fruit") || query.includes("Veggies") || query.includes("vegetables")) {
-    navigate("/fruits");
-  } else if (query.includes("dairy") || query.includes("milk") || query.includes("cheese")) {
-    navigate("/dairy");
-  } 
-  else {
-    navigate(`/allproducts?search=${encodeURIComponent(query)}`);
-  }
+    if (query.includes("seafood") || query.includes("meat")) {
+      navigate("/seafood");
+    } else if (query.includes("fruit") || query.includes("veggies") || query.includes("vegetables")) {
+      navigate("/fruits");
+    } else if (query.includes("dairy") || query.includes("milk") || query.includes("cheese")) {
+      navigate("/dairy");
+    } else {
+      navigate(`/allproducts?search=${encodeURIComponent(query)}`);
+    }
 
-  setSearchQuery("");
-  setShowMenu(false);
-};
+    setSearchQuery("");
+    setShowMenu(false);
+  };
 
   const navLinks = [
-    { name: "Home", href: "/" },
-    { name: "Shop", href: "#shop" },
-    { name: "Process", href: "#process" },
-    { name: "Products", href: "#product" },
-    { name: "Contact Us", href: "#contact" },
+    { name: "Home", path: "/", isHash: false },
+    { name: "Shop", path: "#shop", isHash: true },
+    { name: "Process", path: "#process", isHash: true },
+    { name: "Products", path: "#product", isHash: true },
+    { name: "Contact Us", path: "#contact", isHash: true },
   ];
 
   return (
@@ -84,12 +83,21 @@ const handleSearchSubmit = (e) => {
         <ul className="md:flex hidden items-center gap-x-8 lg:gap-x-12">
           {navLinks.map((link, index) => (
             <li key={index} className="relative group">
-              <a
-                href={link.href}
-                className="font-semibold tracking-wider text-zinc-800 group-hover:text-orange-500 transition-colors"
-              >
-                {link.name}
-              </a>
+              {link.isHash ? (
+                <a
+                  href={link.path}
+                  className="font-semibold tracking-wider text-zinc-800 group-hover:text-orange-500 transition-colors"
+                >
+                  {link.name}
+                </a>
+              ) : (
+                <Link
+                  to={link.path}
+                  className="font-semibold tracking-wider text-zinc-800 group-hover:text-orange-500 transition-colors"
+                >
+                  {link.name}
+                </Link>
+              )}
               <span className="absolute -bottom-1.5 left-0 w-0 group-hover:w-full h-0.5 bg-orange-500 rounded-full transition-all duration-300" />
             </li>
           ))}
@@ -192,13 +200,23 @@ const handleSearchSubmit = (e) => {
               <ul className="flex flex-col gap-y-5 items-center">
                 {navLinks.map((link, index) => (
                   <li key={index}>
-                    <a
-                      href={link.href}
-                      onClick={() => setShowMenu(false)}
-                      className="font-semibold tracking-wider text-zinc-800 hover:text-orange-500 text-lg transition-colors"
-                    >
-                      {link.name}
-                    </a>
+                    {link.isHash ? (
+                      <a
+                        href={link.path}
+                        onClick={() => setShowMenu(false)}
+                        className="font-semibold tracking-wider text-zinc-800 hover:text-orange-500 text-lg transition-colors"
+                      >
+                        {link.name}
+                      </a>
+                    ) : (
+                      <Link
+                        to={link.path}
+                        onClick={() => setShowMenu(false)}
+                        className="font-semibold tracking-wider text-zinc-800 hover:text-orange-500 text-lg transition-colors"
+                      >
+                        {link.name}
+                      </Link>
+                    )}
                   </li>
                 ))}
               </ul>
