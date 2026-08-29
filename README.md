@@ -1,4 +1,4 @@
-# 🛒 Grocify - Modern E-Commerce Grocery Application
+# 🛒 grocery - Modern E-Commerce Grocery Application
 
 Grocify is a fast, responsive, and interactive online grocery store web application. Designed with a modern UI/UX, it offers a seamless shopping experience complete with product categorization, full shopping cart functionality, wishlist management, and dynamic navigation.
 
