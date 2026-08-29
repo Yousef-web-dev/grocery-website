@@ -14,27 +14,22 @@ import Fruits from "./components/fruits/Fruits";
 import Dairy from "./components/dairy/Dairy";
 import SeaFood from "./components/seafood/SeaFood";
 
-const router = createBrowserRouter(
-  [
-    {
-      path: "/",
-      element: <Layout />,
-      children: [
-        { index: true, element: <Home /> },
-        { path: "allproducts", element: <AllProducts /> },
-        { path: "cart", element: <CartPage /> },
-        { path: "wishlist", element: <WishlistPage /> },
-
-        { path: "fruits", element: <Fruits /> },
-        { path: "dairy", element: <Dairy /> },
-        { path: "seafood", element: <SeaFood /> },
-      ],
-    },
-  ],
+const router = createBrowserRouter([
   {
-    basename: import.meta.env.DEV ? "/" : "/grocery-website",
-  }
-);
+    path: "/",
+    element: <Layout />,
+    children: [
+      { index: true, element: <Home /> },
+      { path: "allproducts", element: <AllProducts /> },
+      { path: "cart", element: <CartPage /> },
+      { path: "wishlist", element: <WishlistPage /> },
+
+      { path: "fruits", element: <Fruits /> },
+      { path: "dairy", element: <Dairy /> },
+      { path: "seafood", element: <SeaFood /> },
+    ],
+  },
+]);
 
 const App = () => {
   useEffect(() => {
@@ -42,7 +37,7 @@ const App = () => {
     const removeDragEvents = initDragScroll(lenis);
 
     return () => {
-      lenis.destroy();
+      if (lenis) lenis.destroy();
     };
   }, []);
 

@@ -8,15 +8,18 @@ import { Link, useNavigate } from "react-router-dom";
 import { useCart } from "../cartcontext/CartContext";
 
 const Navbar = () => {
+  // hooks
   const [showMenu, setShowMenu] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
-
   const navigate = useNavigate();
+
   const { cart, favorites } = useCart();
 
   const totalCartItems = cart?.reduce((acc, item) => acc + item.quantity, 0) || 0;
 
+
+  // handle scroll
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 10);
